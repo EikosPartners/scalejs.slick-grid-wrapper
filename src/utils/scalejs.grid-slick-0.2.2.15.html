@@ -1,0 +1,151 @@
+<!-- Numeric Filter Popup -->
+<div id="number_filter_template">
+    <div data-bind="css: { iconArrowLeft: !flipped(), iconArrowRight: flipped }"></div>
+    <div class="numberFilter">
+        <div>
+            <span> Quick Search:</span>
+            <input data-bind="value: quickSearch, valueUpdate: 'afterkeydown'"/>
+        </div>
+        <br/>
+
+        <div><strong style="text-decoration: underline">or</strong> show rows where..</div>
+        <div class="numberFilterBox">
+            <div style="display: none">
+                <input type="checkbox" data-bind="checked: notEmpty"/>
+                <span>Are Not Empty</span>
+            </div>
+            <div>
+                <select data-bind="value: comparisonA">
+                    <option value="EqualTo">Is Equal To</option>
+                    <option value="LessThan">Is Less Than</option>
+                    <option value="NotEqualTo">Is Not Equal To</option>
+                    <option value="GreaterThan">Is Greater Than</option>
+                </select>
+            </div>
+            <input type="text" data-bind="value: valueA, valueUpdate: 'afterkeydown'"/>
+
+            <div>
+                <input type="radio" name="filterLogic" value="or" data-bind="checked: radioFilterValue" />
+                <label>or</label>
+                <input type="radio" name="filterLogic" value="and" data-bind="checked: radioFilterValue" />
+                <label>and</label>
+            </div>
+
+            <div>
+                <select data-bind="value: comparisonB">
+                    <option value="EqualTo">Is Equal To</option>
+                    <option value="LessThan">Is Less Than</option>
+                    <option value="NotEqualTo">Is Not Equal To</option>
+                    <option value="GreaterThan">Is Greater Than</option>
+                </select>
+            </div>
+            <input type="text" data-bind="value: valueB, valueUpdate: 'afterkeydown'"/>
+        </div>
+    </div>
+</div>
+
+<!-- Sting Filter Popup without Checkbox selection -->
+<div id="string_nocheckbox_filter_template">
+    <div data-bind="css: { iconArrowLeft: !flipped(), iconArrowRight: flipped }"></div>
+    <div class="numberFilter">
+        <div>
+            <span> Quick Search:</span>
+            <input data-bind="value: quickSearch, valueUpdate: 'afterkeydown'"/>
+        </div>
+        <br/>
+
+        <div><strong style="text-decoration: underline">or</strong> show rows where..
+        </div>
+        <div class="numberFilterBox">
+            <div style="display: none">
+                <input type="checkbox" data-bind="checked: notEmpty"/>
+                <span>Are Not Empty</span>
+            </div>
+            <div>
+                <select data-bind="value: comparisonA">
+                    <option value="EqualToString">Is Equal To</option>
+                    <!--<option value="NotEqualToString">Is Not Equal To</option>--> <!--AWAITING TUDOR IMPLEMENTATION-->
+                    <option value="Contains">Contains</option>
+                    <!--<option value="NotContains">Does Not Contain</option>--> <!--AWAITING TUDOR IMPLEMENTATION-->
+                    <option value="StartsWith">Starts With</option>
+                    <option value="EndsWith">Ends With</option>
+                </select>
+            </div>
+            <input type="text" data-bind="value: valueA, valueUpdate: 'afterkeydown'"/>
+
+            <div>
+                <input type="radio" name="filterLogic" value="or" data-bind="checked: radioFilterValue"/>
+                <label>or</label>
+                <input type="radio" name="filterLogic" value="and" data-bind="checked: radioFilterValue"/>
+                <label>and</label>
+            </div>
+
+            <div>
+                <select data-bind="value: comparisonB">
+                    <option value="EqualToString">Is Equal To</option>
+                    <!--<option value="NotEqualToString">Is Not Equal To</option>--> <!--AWAITING TUDOR IMPLEMENTATION-->
+                    <option value="Contains">Contains</option>
+                    <!--<option value="NotContains">Does Not Contain</option>--> <!--AWAITING TUDOR IMPLEMENTATION-->
+                    <option value="StartsWith">Starts With</option>
+                    <option value="EndsWith">Ends With</option>
+                </select>
+            </div>
+            <input type="text" data-bind="value: valueB, valueUpdate: 'afterkeydown'"/>
+        </div>
+    </div>
+</div>
+
+<!-- String Filter Popup with virtualized Checkbox selection -->
+<div id="string_filter_template">
+    <div data-bind="css: { iconArrowLeft: !flipped(), iconArrowRight: flipped }"></div>
+    <div class="numberFilter">
+        <div>
+            <span> Quick Search:</span>
+            <input data-bind="value: quickSearch, valueUpdate: 'afterkeydown'" />
+        </div>
+
+        <div class="listFilterBox" style="padding: 5px 2px 10px 5px; overflow-y: hidden; white-space: nowrap;">
+            <div data-bind="visible: loading" style="width: 219px; top: 35px; left: 14px; height: 210px; background: black url('images/spin-circle.gif') no-repeat scroll center; opacity: .4; position: absolute;"></div>
+            <div data-bind="virtualCheckboxList: listValues"></div>
+        </div>
+
+        <div><strong style="text-decoration: underline">or</strong> show rows where..</div>
+        
+        <div class="numberFilterBox">
+            <div style="display: none">
+                <input type="checkbox" data-bind="checked: notEmpty" />
+                <span>Are Not Empty</span>
+            </div>
+            <div>
+                <select data-bind="value: comparisonA">
+                    <option value="EqualToString">Is Equal To</option>
+                    <!--<option value="NotEqualToString">Is Not Equal To</option>--> <!--AWAITING TUDOR IMPLEMENTATION-->
+                    <option value="Contains">Contains</option>
+                    <!--<option value="NotContains">Does Not Contain</option>--> <!--AWAITING TUDOR IMPLEMENTATION-->
+                    <option value="StartsWith">Starts With</option>
+                    <option value="EndsWith">Ends With</option>
+                </select>
+            </div>
+            <input type="text" data-bind="value: valueA, valueUpdate: 'afterkeydown'" />
+
+            <div>
+                <input type="radio" name="filterLogic" value="or" data-bind="checked: radioFilterValue" />
+                <label>or</label>
+                <input type="radio" name="filterLogic" value="and" data-bind="checked: radioFilterValue" />
+                <label>and</label>
+            </div>
+
+            <div>
+                <select data-bind="value: comparisonB">
+                    <option value="EqualToString">Is Equal To</option>
+                    <!--<option value="NotEqualToString">Is Not Equal To</option>--> <!--AWAITING TUDOR IMPLEMENTATION-->
+                    <option value="Contains">Contains</option>
+                    <!--<option value="NotContains">Does Not Contain</option>--> <!--AWAITING TUDOR IMPLEMENTATION-->
+                    <option value="StartsWith">Starts With</option>
+                    <option value="EndsWith">Ends With</option>
+                </select>
+            </div>
+            <input type="text" data-bind="value: valueB, valueUpdate: 'afterkeydown'" />
+        </div>
+    </div>
+</div>
