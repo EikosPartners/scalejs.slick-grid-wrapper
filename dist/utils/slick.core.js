@@ -7,7 +7,6 @@
  */
 
 (function ($) {
-  console.log("IN SLICK CORE######");
   // register namespace
   $.extend(true, window, {
     "Slick": {

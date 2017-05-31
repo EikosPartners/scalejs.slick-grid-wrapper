@@ -10,6 +10,7 @@ import observableFilters from './utils/observableFilters';
 import './utils/jqueryEventDragWrapper.js';
 import './utils/slick.core.js';
 import './utils/slick.grid.js';
+import './css/slick.grid.css';
 
 
 let isObservable = ko.isObservable,
@@ -22,9 +23,10 @@ let isObservable = ko.isObservable,
 
 
 function init(element, valueAccessor, allBindingsAccessor) {
-    var options = allBindingsAccessor().slickGridWrapper;
-	var columns = ko.unwrap(options.columns);
-    var internalItemsSource,
+    var options = allBindingsAccessor().slickGridWrapper,
+	    columns = ko.unwrap(options.columns),
+        viewModel = valueAccessor(),
+        internalItemsSource,
         dataView,
         grid,
         plugins = [];
@@ -144,33 +146,6 @@ function init(element, valueAccessor, allBindingsAccessor) {
         /*jslint unparam: false*/
     }
 
-    function createColumnPicker() {
-        console.log("CP");
-        var curWnd = windowfactory.Window.getCurrent();
-        grid.columnPickerWindow = windowfactory.Window({
-            _isPopup: true,
-            debug: "virtualSelectioModel columnPicker Menu",
-            autoShow: false,
-            resizable: false,
-            maxHeight: 300,
-            showTaskbarIcon: false,
-            alwaysOnTop: true,
-            parent: curWnd,
-            hideOnClose: true,
-            _showOnParentShow: false,
-            _alwaysAboveParent: true,
-            cornerRounding: {
-                "width": 0,
-                "height": 0
-            },
-            _closeOnLostFocus: true
-        });
-
-        grid.columnPickerWindow.onReady(function () {
-            new Slick.Controls.ColumnPicker(grid, options);
-        });
-    }
-
     function createGrid() {
         options.explicitInitialization = true;
 
@@ -178,10 +153,11 @@ function init(element, valueAccessor, allBindingsAccessor) {
 
         grid = new Slick.Grid(element, dataView, viscols, options);
 
-        $(element).data('slickgrid', grid);
+        if (viewModel.onGridCreated != null) {
+            viewModel.onGridCreated(grid);
+        }
 
-        if (!options.disableColumnPicker)
-            createColumnPicker();
+        $(element).data('slickgrid', grid);
 
         for (evt in options.events) {
             (function (evt, func) {

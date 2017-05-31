@@ -1,4 +1,4 @@
-import gridTemplate from './scalejs.grid-slick-0.2.2.15.html';
+import gridTemplate from '../html/scalejs.grid-slick-0.2.2.15.html';
 import { has } from './coreFunctions';
 import ko from 'knockout';
 //import { registerTemplates } from 'scalejs.mvvm';
