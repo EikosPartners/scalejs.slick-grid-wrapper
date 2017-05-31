@@ -30,9 +30,9 @@ var _defaultFilters = require('./utils/defaultFilters');
 
 var _defaultFilters2 = _interopRequireDefault(_defaultFilters);
 
-var _observableFilters = require('./utils/observableFilters');
+var _observableFiltersInlineFiltering = require('./utils/observableFiltersInlineFiltering');
 
-var _observableFilters2 = _interopRequireDefault(_observableFilters);
+var _observableFiltersInlineFiltering2 = _interopRequireDefault(_observableFiltersInlineFiltering);
 
 require('./utils/jqueryEventDragWrapper.js');
 
@@ -80,7 +80,7 @@ function init(element, valueAccessor, allBindingsAccessor) {
         }
 
         // add the filters to the plugins to be initialized later
-        plugins.push((0, _observableFilters2.default)());
+        plugins.push((0, _observableFiltersInlineFiltering2.default)());
 
         return filteredItemsSource;
     }

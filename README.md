@@ -26,5 +26,7 @@ alias {
 }
 ```
 
-# TODO
--Re-enable column picker
+# NOTES
+
+The filtering logic has been simplified to only support a user applying a filter from the input boxes in each column at the top of the grid. The simplified file is named observableFiltersInlineFiltering.js. The original file which supported advanced filtering, with a separate popup window, is in observableFiltersAdvancedFiltering.js. This is only saved as a reference and is not used anywhere.
+

@@ -6,7 +6,7 @@ import changesFlasher from './utils/changesFlasher';
 import defaultSorting from './utils/defaultSorting';
 import observableSorting from './utils/observableSorting';
 import defaultFilters from './utils/defaultFilters';
-import observableFilters from './utils/observableFilters';
+import observableFilters from './utils/observableFiltersInlineFiltering';
 import './utils/jqueryEventDragWrapper.js';
 import './utils/slick.core.js';
 import './utils/slick.grid.js';
