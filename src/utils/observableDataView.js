@@ -65,15 +65,21 @@ export default function (opts) {
 
     function subscribeToItemsSource() {
         itemsSourceSub = computed({
-            read: function () {
+            read: function read() {
                 var newItems = itemsSource() || [],
-                    rows = new Array(newItems.length);
+                    rows = new Array();
+                var oldItems = items;
 
                 items = {}; // Clear items lookup table.
 
                 newItems.forEach(function (item, index) {
+                    const oldItem = oldItems[item.index];
+                    const isNew = oldItem == null || Object.keys(item).some((key) => {
+                        return item[key] !== oldItem[key];
+                    });
+
+                    if (isNew) rows.push(item.index);
                     items[item.index] = item;
-                    rows[index] = item.index;
                 });
 
                 if (rows.length > 0) {

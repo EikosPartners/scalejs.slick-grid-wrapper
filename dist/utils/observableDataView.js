@@ -61,13 +61,19 @@ exports.default = function (opts) {
         itemsSourceSub = computed({
             read: function read() {
                 var newItems = itemsSource() || [],
-                    rows = new Array(newItems.length);
+                    rows = new Array();
+                var oldItems = items;
 
                 items = {}; // Clear items lookup table.
 
                 newItems.forEach(function (item, index) {
+                    var oldItem = oldItems[item.index];
+                    var isNew = oldItem == null || Object.keys(item).some(function (key) {
+                        return item[key] !== oldItem[key];
+                    });
+
+                    if (isNew) rows.push(item.index);
                     items[item.index] = item;
-                    rows[index] = item.index;
                 });
 
                 if (rows.length > 0) {
