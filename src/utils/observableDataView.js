@@ -2,6 +2,7 @@ import gridTemplate from '../html/scalejs.grid-slick-0.2.2.15.html';
 import { has } from './coreFunctions';
 import ko from 'knockout';
 //import { registerTemplates } from 'scalejs.mvvm';
+import './slick.groupitemmetadataprovider';
   
 var isObservable = ko.isObservable,
     computed = ko.computed;
@@ -18,6 +19,10 @@ export default function (opts) {
         itemsCountSub,
         itemsSourceSub,
         items = {};
+
+    if (!opts.groupItemMetadataProvider) {
+        opts.groupItemMetadataProvider = new Slick.Data.GroupItemMetadataProvider();
+    }
 
     function getLength() {
         if (isObservable(itemsCount)) {
@@ -37,6 +42,16 @@ export default function (opts) {
 
     function getItemMetadata(index) {
         var item = items[index];
+
+        if (item === undefined) {
+            return null;
+        }
+
+        // overrides for grouping rows
+        if (item.__group) {
+            return opts.groupItemMetadataProvider.getGroupRowMetadata(item);
+        }
+
         return item ? item.metadata : null;
     }
 

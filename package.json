@@ -1,6 +1,6 @@
 {
   "name": "slick-grid-wrapper",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "dependencies": {
     "babel-plugin-transform-html-import-to-string": "0.0.1",
     "jquery": "^2.2.4",
