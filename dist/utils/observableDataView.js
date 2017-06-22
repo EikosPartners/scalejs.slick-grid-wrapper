@@ -30,7 +30,14 @@ exports.default = function (opts) {
     }
 
     function getItem(index) {
-        return items ? items[index] : null;
+        var item = items[index];
+
+        if (item && item.__group) {
+            // Format the title for the item.
+            item.title = item.groupingCol + ': ' + item.value;
+        }
+
+        return item;
     }
 
     function getItemMetadata(index) {
