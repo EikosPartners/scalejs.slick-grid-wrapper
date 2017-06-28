@@ -41,7 +41,8 @@ export default function (opts) {
 
         if (item && item.__group) {
             // Format the title for the item.
-            item.title = `${item.groupingCol}: ${item.value}`;
+            let collapseExpandButton = "<input class='toggle-group collapse' type='button'></input>"
+            item.title = `${collapseExpandButton} ${item.groupingCol}: ${item.value} (${item.count} items)`;
         }
 
         return item;
