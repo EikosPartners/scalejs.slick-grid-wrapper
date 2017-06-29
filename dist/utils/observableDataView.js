@@ -53,6 +53,10 @@ exports.default = function (opts) {
             return opts.groupItemMetadataProvider.getGroupRowMetadata(item);
         }
 
+        if (item.__groupTotals) {
+            return opts.groupItemMetadataProvider.getTotalsRowMetadata(item);
+        }
+
         return item ? item.metadata : null;
     }
 
