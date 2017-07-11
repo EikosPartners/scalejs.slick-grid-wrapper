@@ -34,7 +34,7 @@ exports.default = function (opts) {
 
         if (item && item.__group) {
             // Format the title for the item.
-            var collapseExpandButton = "<input class='toggle-group collapse' type='button'></input>";
+            var collapseExpandButton = '<input class=\'toggle-group collapse\' id="group-' + item.value + '" type=\'button\'></input>';
             item.title = collapseExpandButton + ' ' + item.groupingCol + ': ' + item.value + ' (' + item.count + ' items)';
         }
 
