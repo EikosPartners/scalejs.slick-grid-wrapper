@@ -274,10 +274,12 @@ function init(element, valueAccessor, allBindingsAccessor) {
     function subscribeToViewport() {
         var top;
         if (isObservable(options.viewport)) {
-            grid.onViewportChanged.subscribe(function () {
-                var vp = grid.getViewport();
-                options.viewport(vp);
-            });
+            var updateViewportObservable = function updateViewportObservable() {
+                options.viewport(grid.getViewport());
+            };
+
+            grid.onViewportChanged.subscribe(updateViewportObservable);
+            updateViewportObservable();
 
             options.viewport.subscribe(function (vp) {
                 // stop stack overflow due to unknown issue with slickgrid

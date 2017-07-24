@@ -76,7 +76,7 @@ function init(element, valueAccessor, allBindingsAccessor) {
 
     function setupIndex(itemsSource) {
         var indexedItemsSource;
-        
+
         // if virtual scrolling is not enabled, set the items' index
         if (!options.itemsCount) {
             indexedItemsSource = ko.computed(function () {
@@ -186,13 +186,13 @@ function init(element, valueAccessor, allBindingsAccessor) {
                 columns = ko.unwrap(options.columns);
                 var viscols = columns.filter(function(c) { return c.isHidden == null || !c.isHidden; });
                 grid.setColumns(viscols);
-                                    
+
                 //manually trigger the reordered event
                 grid.onColumnsReordered.notify({ grid: grid }, new Slick.EventData(), grid);
             }
 
             options.columns.subscribe(onUserColumns);
-        } 
+        }
 
         if (options.plugins && options.plugins.changesFlasher) {
             changesFlasher(grid, options.plugins.changesFlasher);
@@ -200,7 +200,7 @@ function init(element, valueAccessor, allBindingsAccessor) {
 
         grid.init();
     }
-   
+
     function subscribeToDataView() {
         dataView.subscribe();
     }
@@ -235,10 +235,12 @@ function init(element, valueAccessor, allBindingsAccessor) {
     function subscribeToViewport() {
         var top;
         if (isObservable(options.viewport)) {
-            grid.onViewportChanged.subscribe(function () {
-                var vp = grid.getViewport();
-                options.viewport(vp);
-            });
+            function updateViewportObservable() {
+                options.viewport(grid.getViewport());
+            }
+
+            grid.onViewportChanged.subscribe(updateViewportObservable);
+            updateViewportObservable();
 
             options.viewport.subscribe(function (vp) {
                 // stop stack overflow due to unknown issue with slickgrid
